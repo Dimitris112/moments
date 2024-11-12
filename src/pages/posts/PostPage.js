@@ -8,6 +8,8 @@ import appStyles from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
+import Post from "./Post";
+
 function PostPage() {
     const { id } = useParams();
     const [post, setPost] = useState({ results: [] });
@@ -35,7 +37,7 @@ function PostPage() {
         <Row className="h-100">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
                 <p>Popular profiles for mobile</p>
-                <p>Post component</p>
+                <Post {...post.results[0]} setPosts={setPost} postPage />
                 <Container className={appStyles.Content}>
                     Comments
                 </Container>
