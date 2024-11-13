@@ -7,7 +7,6 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-
 import Post from "./Post";
 import Comment from "../comments/Comment";
 
@@ -30,7 +29,7 @@ function PostPage() {
                 const [{ data: post }, { data: comments }] = await Promise.all([
                     axiosReq.get(`/posts/${id}`),
                     axiosReq.get(`/comments/?post=${id}`),
-                ])
+                ]);
                 setPost({ results: [post] });
                 setComments(comments);
                 // console.table(post);
@@ -38,7 +37,7 @@ function PostPage() {
                 // if any promises are rejected - catch error
                 console.log(err);
             }
-        }
+        };
 
         handleMount();
     }, [id]);
@@ -61,13 +60,18 @@ function PostPage() {
                         "Comments"
                     ) : null}
                     {comments.results.length ? (
-                        comments.results.map(comment => (
-                            <Comment key={comment.id} {...comment} />
+                        comments.results.map((comment) => (
+                            <Comment
+                                key={comment.id}
+                                {...comment}
+                                setPost={setPost}
+                                setComments={setComments}
+                            />
                         ))
                     ) : currentUser ? (
                         <span>No comments yet, be the first to comment!</span>
                     ) : (
-                        <span>No comments...yet</span>
+                        <span>No comments... yet</span>
                     )}
                 </Container>
             </Col>
