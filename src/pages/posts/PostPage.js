@@ -42,7 +42,7 @@ function PostPage() {
                 // console.table(post);
             } catch (err) {
                 // if any promises are rejected - catch error
-                console.log(err);
+                // console.log(err);
             }
         };
 
